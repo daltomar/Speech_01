@@ -30,46 +30,23 @@ def page():
         key = False
         
         try:
+            # Reocgnizer will listen using the computer's microphone
             with mic as source:
                 audio = recognizer.listen(source)
+            # Speech will be transcripted by google's API
             command = recognizer.recognize_google(audio, language = 'pt-BR')
             print (command)
+            # Saying "oi" (hi) will load a new page
             if command == "Oi":
                 return render_template ("page.html")
+            # Saying "sim" (yes) will load the same page as above but with an extra message
             elif command == "sim":
                 key = True
                 return render_template ("page.html", key = key)
+            # Saying anything else will load an error page
             else:
                 return redirect('/erro')
+        # Except will handle another issues from the recognizer and load a specific page
         except:
             return redirect('/exception')
 
-    
-
-
-
-
-
-#r = sr.Recognizer()
-
-#test = sr.AudioFile('NeueAufnahme107.wav')
-
-#with test as source:
-#    audio = r.record(source)
-
-#text = r.recognize_google(audio, language = 'pt-BR')
-
-#print(text)
-
-#output = open('test.txt', 'w')
-#output.write(text)
-#output.close()
-
-#mic = sr.Microphone()
-
-#with mic as source:
-#    audio = r.listen(source)
-
-#command = r.recognize_google(audio, language = 'pt-BR')
-
-#print(command)
