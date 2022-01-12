@@ -1,6 +1,5 @@
 
 import speech_recognition as sr
-import time
 from flask import Flask, render_template, request, redirect
 
 
